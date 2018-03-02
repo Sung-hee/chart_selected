@@ -1,5 +1,5 @@
 var _chart;
-var selected = "http://61.72.187.6/attn/maker";
+var selected = "http://61.72.187.6/phps/giftChart";
 
 // 파라메터 정보가 저장될 오브젝트
 // common.js 같은 모든 페이지에서 로딩되는 js 파일에 넣어두면 됨.
@@ -28,7 +28,8 @@ console.log(companycode);
     function requestData(){
       setInterval(function () {
         $.ajax({
-            url: selected + "?companycode=" + companycode,
+            // url: selected + "?companycode=" + companycode,
+            url: selected,
             type: "GET",
             dataType: "json",
             async: false,
@@ -51,19 +52,17 @@ console.log(companycode);
                   data[i][0], // the date
                   data[i][5] // the volume
                 ]);
-                console.log(volume);
               }
               _chart.series[0].setData(ohlc);
               _chart.series[1].setData(volume);
-              console.log(data);
-              console.log(selected+"?companycode="+companycode);
             },
             cache: false
         });
         console.log("ajax 호출");
       },5000)
     }
-    $.getJSON(selected + "?companycode=" + companycode, function(data) {
+    // $.getJSON(selected + "?companycode=" + companycode, function(data) {
+    $.getJSON(selected, function(data) {
 
       // split the data set into ohlc and volume
       var volumeColor = '';
@@ -97,6 +96,23 @@ console.log(companycode);
       title: {
       },
       rangeSelector: {
+        inputEnabled: false,
+          buttons: [{
+            type: 'minute',
+            count: 30,
+            text: '30분'
+          }, {
+            type: 'hour',
+            count: 1,
+            text: '1시간'
+          }, {
+            type: 'hour',
+            count: 6,
+            text: '6시간'
+          }, {
+            type: 'all',
+            text: '전체'
+          }],
         buttonTheme: {
           fill: 'none',
           stroke: 'none',
@@ -108,7 +124,7 @@ console.log(companycode);
             fontSize: "15px"
           }
         },
-        selected: 0,
+        selected: 1
       },
       scrollbar : {
         enabled: false
@@ -119,7 +135,10 @@ console.log(companycode);
       xAxis: {
         type: 'datetime',
         height: '100%',
-        tickPixelInterval: 150
+        tickPixelInterval: 150,
+        labels: {
+          enabled: false
+        }
       },
       yAxis: [{
         height: '70%',
@@ -155,7 +174,7 @@ console.log(companycode);
         series: {
           animation: false,
           dataGrouping: {
-            units: [ ['day', [1]] ]
+            units: [ ['second', [1]] ]
           },
         }
       },
@@ -223,7 +242,6 @@ console.log(companycode);
         }
       }]
     });
-      console.log(volume);
       console.log("차트그리기");
   });
 });

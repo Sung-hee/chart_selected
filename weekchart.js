@@ -101,8 +101,8 @@ console.log(companycode);
           fill: 'none',
           stroke: 'none',
           'stroke-width': 0,
-          width: 60,
-          height: 30,
+          width: 50,
+          height: 20,
           r: 8,
           style: {
             fontSize: "15px"
@@ -118,11 +118,11 @@ console.log(companycode);
       },
       xAxis: {
         type: 'datetime',
-        height: '80%',
+        height: '100%',
         tickPixelInterval: 150
       },
       yAxis: [{
-        height: '60%',
+        height: '70%',
         lineWidth: 2,
         resize: {
           enabled: true
@@ -132,8 +132,8 @@ console.log(companycode);
         align: 'right',
         x: -3
         },
-        top: '65%',
-        height: '15%',
+        top: '75%',
+        height: '25%',
         offset: 0,
         lineWidth: 2
       }],

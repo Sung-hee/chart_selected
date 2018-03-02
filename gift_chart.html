@@ -1,0 +1,64 @@
+<html style="width:100%; height:100%; margin: 0;">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script src="./gift_highstock.js"></script>
+    <script src="https://code.highcharts.com/stock/modules/exporting.js"></script>
+    <script src="./indicators.js"></script>
+    <script src="./indicators10.js"></script>
+    <script src="./indicators15.js"></script>
+    <script src="./indicators30.js"></script>
+    <script src="./indicators60.js"></script>
+    <script src="./gift_chart.js"></script>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  </head>
+  <body>
+    <div class="container" style="width:100%;">
+      <div class="table" id="chart">
+        <button type="button" class="btn btn-danger" style="width:30%; font-size:15px;"disabled>고&nbsp&nbsp&nbsp</br>고&nbsp&nbsp&nbsp</button>
+        <button type="button" class="btn btn-warning" style="width:30%; font-size:15px;" disabled>C1&nbsp&nbsp&nbsp</br>C2&nbsp&nbsp&nbsp</button>
+        <button type="button" class="btn btn-primary" style="width:30%; font-size:15px;" disabled>저&nbsp&nbsp&nbsp</br>저&nbsp&nbsp&nbsp</button>
+        </br></br>
+        <!-- <button type="button" class="btn btn-danger" style="width:33%; height:40; font-size:20px;"disabled>고&nbsp&nbsp&nbsp</button>
+        <button type="button" class="btn btn-warning" style="width:33%; height:40; font-size:20px;" disabled>C2&nbsp&nbsp&nbsp</button>
+        <button type="button" class="btn btn-primary" style="width:33%; height:40; font-size:20px;" disabled>저&nbsp&nbsp&nbsp</button> -->
+      </div>
+    </div>
+  </body>
+  <div id="container" style="width:100%; height: 85%; min-width: 100%; margin:0;"></div>
+</html>
+
+
+<script>
+  var height = $(window).height()*0.888;
+  $(document).ready(function() {
+  setInterval(function () {
+    $.ajax({
+      url: "http://61.72.187.6/phps/c1c2",
+      type: "GET",
+      dataType: "json",
+      async: false,
+      success: function(data) {
+        var json_data = '';
+        $.each(data, function(key, value){
+          json_data += '<button type="button" class="btn btn-danger" style="width:33%; font-size:15px;"disabled>'+'고&nbsp&nbsp&nbsp'+value.dayc1high+'</br>'+'고&nbsp&nbsp&nbsp'+value.dayc2high+'</button>';
+          json_data += '<button type="button" class="btn btn-warning" style="width:33%; font-size:15px;" disabled>'+value.c1+'&nbsp&nbsp&nbsp'+value.c1high+'</br>'+'C2&nbsp&nbsp&nbsp'+value.c2high+'</button>';
+          json_data += '<button type="button" class="btn btn-primary" style="width:33%; font-size:15px;" disabled>'+'저&nbsp&nbsp&nbsp'+value.dayc1low+'</br>'+'저&nbsp&nbsp&nbsp'+value.dayc2low+'</button>';
+          // json_data += '</br></br>'
+          // json_data += '<button type="button" class="btn btn-danger" style="width:33%; height:40; font-size:20px;"disabled>'+'고&nbsp&nbsp&nbsp'+value.dayc2high+'</button>';
+          // json_data += '<button type="button" class="btn btn-warning" style="width:33%; height:40; font-size:20px;" disabled>'+value.c2+'&nbsp&nbsp&nbsp'+value.c2high+'</button>';
+          // json_data += '<button type="button" class="btn btn-primary" style="width:33%; height:40; font-size:20px;" disabled>'+'저&nbsp&nbsp&nbsp'+value.dayc2low+'</button>';
+        });
+        $('#chart').html(json_data);
+      }
+    });
+  }, 5000);
+});
+</script>
