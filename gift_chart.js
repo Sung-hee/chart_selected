@@ -83,7 +83,7 @@ console.log(companycode);
           data[i][0], // the date
           data[i][5] // the volume
         ]);
-        // console.log(volume);
+        console.log(volume);
     }
     console.log("차트 데이터 저장");
     _chart = new Highcharts.StockChart({

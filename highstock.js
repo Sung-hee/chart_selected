@@ -10421,8 +10421,8 @@
             },
             defaultButtons: [{
                 type: "month",
-                count: 1,
-                text: "1달"
+                count: 2,
+                text: "2달"
             }, {
                 type: "month",
                 count: 3,

@@ -51,11 +51,11 @@ console.log(companycode);
                   data[i][0], // the date
                   data[i][5] // the volume
                 ]);
-                console.log(volume);
+                // console.log(volume);
               }
               _chart.series[0].setData(ohlc);
               _chart.series[1].setData(volume);
-              console.log(data);
+              // console.log(data);
               console.log(selected+"?companycode="+companycode);
             },
             cache: false
@@ -89,6 +89,8 @@ console.log(companycode);
     console.log("차트 데이터 저장");
     _chart = new Highcharts.StockChart({
       chart: {
+        // zoomType: null,
+        panning: false,
         renderTo: 'container',
         events: {
           load: requestData
@@ -108,6 +110,13 @@ console.log(companycode);
             fontSize: "15px"
           }
         },
+        inputEnabled: false,
+        labelStyle: {
+            display:'none'
+        },
+        buttonTheme: {
+          display:'none'
+        },
         selected: 0,
       },
       scrollbar : {
@@ -116,13 +125,17 @@ console.log(companycode);
       navigator: {
         enabled: false
       },
+      tooltip: {
+        followPointer: false,  // this is already the default, it's just to stress what's said in commit comments and make code "speak"
+        followTouchMove: false,  // th
+      },
       xAxis: {
         type: 'datetime',
         height: '100%',
         tickPixelInterval: 150
       },
       yAxis: [{
-        height: '70%',
+        height: '80%',
         lineWidth: 2,
         resize: {
           enabled: true
@@ -132,8 +145,8 @@ console.log(companycode);
         align: 'right',
         x: -3
         },
-        top: '75%',
-        height: '25%',
+        top: '80%',
+        height: '20%',
         offset: 0,
         lineWidth: 2
       }],
@@ -223,7 +236,7 @@ console.log(companycode);
         }
       }]
     });
-      console.log(volume);
+      // console.log(volume);
       console.log("차트그리기");
   });
 });
