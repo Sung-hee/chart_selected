@@ -1,3 +1,4 @@
+
 const redraw = (event) => {
   const chartTarget = event.target;
 
@@ -62,11 +63,11 @@ $.getJSON('http://61.72.187.6/attn/maker?companycode=005930', function(data) {
     }
 
     // create the chart
-    Highcharts.stockChart('container', {
+    _chart = Highcharts.stockChart('container', {
       chart: {
         events: {
         	redraw: redraw,
-          load: function(event) {
+          load: function requestData(event){
             // Get the volume series by id.
             var volSeries = this.series.find(function(s) {
               return s.userOptions.id === 'volume';
@@ -110,7 +111,46 @@ $.getJSON('http://61.72.187.6/attn/maker?companycode=005930', function(data) {
             })(volSeries.pointAttribs);
             // Need to call update so the changes get taken into account on first draw.
             this.update({});
-          }
+                setInterval(function () {
+                  $.ajax({
+                      url: "http://61.72.187.6/attn/maker?companycode=005930",
+                      type: "GET",
+                      dataType: "json",
+                      async: false,
+                      success: function(data) {
+                        // split the data set into ohlc and volume
+                        var volumeColor = '';
+                        var ohlc = [],
+                            volume = [],
+                            dataLength = data.length;
+
+                        for (i = 0; i < dataLength; i++) {
+                          ohlc.push([
+                            data[i][0], // the date
+                            data[i][1], // open
+                            data[i][2], // high
+                            data[i][3], // low
+                            data[i][4] // close
+                          ]);
+                          volume.push([
+                            data[i][0], // the date
+                            data[i][5] // the volume
+                          ]);
+                          // console.log(volume);
+                        }
+                        _chart.series[0].setData(ohlc);
+                        _chart.series[1].setData(volume);
+                        // console.log(data);
+                        // console.log(selected+"?companycode="+companycode);
+                      },
+                      cache: false
+                  });
+                  console.log("ajax 호출");
+                },5000)
+              }
+          // load: function(event) {
+          //
+          // }
         }
       },
       rangeSelector: {

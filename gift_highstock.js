@@ -10420,13 +10420,13 @@
                 this.selected = this.options.selected = a
             },
             defaultButtons: [{
-                type: "month",
-                count: 1,
-                text: "1달"
+                type: "minute",
+                count: 30,
+                text: "30분"
             }, {
-                type: "month",
-                count: 3,
-                text: "3달"
+                type: "hour",
+                count: 1,
+                text: "1시간"
             }, {
                 type: "month",
                 count: 6,
