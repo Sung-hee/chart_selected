@@ -1,5 +1,5 @@
 var _chart;
-var selected = "http://61.72.187.6/phps/giftChart";
+var selected = "http://61.72.187.6/attn/maker";
 
 // 파라메터 정보가 저장될 오브젝트
 // common.js 같은 모든 페이지에서 로딩되는 js 파일에 넣어두면 됨.
@@ -53,8 +53,7 @@ console.log(companycode);
         }
       }
     };
-    // $.getJSON(selected + "?companycode=" + companycode, function(data) {
-    $.getJSON(selected, function(data) {
+    $.getJSON(selected + "?companycode=" + companycode, function(data) {
 
       // split the data set into ohlc and volume
       var volumeColor = '';
@@ -75,6 +74,7 @@ console.log(companycode);
           data[i][0], // the date
           data[i][5] // the volume
         ]);
+        // console.log(volume);
     }
     console.log("차트 데이터 저장");
     _chart = new Highcharts.StockChart({
@@ -84,6 +84,8 @@ console.log(companycode);
             display: 'none'
           }
         },
+        // zoomType: null,
+        // panning을 지워야 웹에서 드래그가 됨 !
         panning: false,
         renderTo: 'container',
         events: {
@@ -168,13 +170,13 @@ console.log(companycode);
               });
               console.log("ajax 호출");
             },5000)
-          }
+          },
         }
       },
       title: {
       },
       rangeSelector: {
-        selected: 1,
+        selected: 0,
         // enabled: false,
         inputEnabled: false,
         labelStyle: {
@@ -197,10 +199,7 @@ console.log(companycode);
       xAxis: {
         type: 'datetime',
         height: '100%',
-        tickPixelInterval: 150,
-        labels: {
-          enabled: false
-        }
+        tickPixelInterval: 150
       },
       yAxis: [{
         height: '80%',
@@ -236,7 +235,7 @@ console.log(companycode);
         series: {
           animation: false,
           dataGrouping: {
-            units: [ ['second', [1]] ]
+            units: [ ['day', [1]] ]
           },
         }
       },
@@ -254,19 +253,10 @@ console.log(companycode);
         yAxis: 1,
         turboThreshold: Number.MAX_VALUE
       }, {
-        type: 'sma',
+        type: 'Hegg12',
         linkedTo: 'price',
         zIndex: 1,
-        marker: {
-            enabled: false
-        },
-        dataGrouping: {
-          groupPixelWidth: 500
-        },
-      }, {
-        type: 'sma10',
-        linkedTo: 'price',
-        zIndex: 1,
+        color: '#FF607B',
         marker: {
             enabled: false
         },
@@ -274,29 +264,10 @@ console.log(companycode);
           groupPixelWidth: 500
         }
       }, {
-        type: 'sma15',
+        type: 'Legg12',
         linkedTo: 'price',
         zIndex: 1,
-        marker: {
-            enabled: false
-        },
-        dataGrouping: {
-          groupPixelWidth: 500
-        }
-      }, {
-        type: 'sma30',
-        linkedTo: 'price',
-        zIndex: 1,
-        marker: {
-            enabled: false
-        },
-        dataGrouping: {
-          groupPixelWidth: 500
-        }
-      }, {
-        type: 'sma60',
-        linkedTo: 'price',
-        zIndex: 1,
+        color: '#5F7AFF',
         marker: {
             enabled: false
         },
@@ -305,6 +276,7 @@ console.log(companycode);
         }
       }]
     });
+      // console.log(volume);
       console.log("차트그리기");
   });
 });
