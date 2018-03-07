@@ -255,6 +255,7 @@ console.log(companycode);
         turboThreshold: Number.MAX_VALUE
       }, {
         type: 'Hegg11',
+        name: '황금추세 상선',
         linkedTo: 'price',
         zIndex: 1,
         color: '#FF607B',
@@ -266,6 +267,7 @@ console.log(companycode);
         },
       }, {
         type: 'Legg11',
+        name: '황금추세 하선',
         linkedTo: 'price',
         zIndex: 1,
         color: '#5F7AFF',
@@ -277,6 +279,7 @@ console.log(companycode);
         }
       }, {
         type: 'Hegg30',
+        name: '황금추세 상선',
         linkedTo: 'price',
         zIndex: 1,
         color: '#A0A0A0',
@@ -288,6 +291,7 @@ console.log(companycode);
         }
       }, {
         type: 'Legg30',
+        name: '황금추세 하선',
         linkedTo: 'price',
         zIndex: 1,
         color: '#A0A0A0',

@@ -253,6 +253,7 @@ console.log(companycode);
         turboThreshold: Number.MAX_VALUE
       }, {
         type: 'sma',
+        name: '이평선 (5)',
         linkedTo: 'price',
         zIndex: 1,
         marker: {
@@ -263,6 +264,7 @@ console.log(companycode);
         },
       }, {
         type: 'sma10',
+        name: '이평선 (10)',
         linkedTo: 'price',
         zIndex: 1,
         marker: {
@@ -273,6 +275,7 @@ console.log(companycode);
         }
       }, {
         type: 'sma15',
+        name: '이평선 (15)',
         linkedTo: 'price',
         zIndex: 1,
         marker: {
@@ -283,6 +286,7 @@ console.log(companycode);
         }
       }, {
         type: 'sma30',
+        name: '이평선 (30)',
         linkedTo: 'price',
         zIndex: 1,
         marker: {
@@ -293,6 +297,7 @@ console.log(companycode);
         }
       }, {
         type: 'sma60',
+        name: '이평선 (60)',
         linkedTo: 'price',
         zIndex: 1,
         marker: {
